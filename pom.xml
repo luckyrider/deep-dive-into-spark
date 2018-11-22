@@ -10,5 +10,6 @@
   <modules>
   	<module>examples/simpleapp</module>
     <module>examples/simpleapp-launcher</module>
+    <module>examples/netty</module>
   </modules>
 </project>
