@@ -34,3 +34,11 @@
 
 ### livy-core
 
+## Misc
+
+### Logging
+
+1. `livy-<user>-server.out`
+2. `yyyy_mm_dd.request.log`. WebServer uses `org.eclipse.jetty.server.handler.RequestLogHandler`, 
+in turn uses `org.eclipse.jetty.server.NCSARequestLog`.
+3. `livy.log`. configured via `$LIVY_CONF_DIR/log4j.properties`
