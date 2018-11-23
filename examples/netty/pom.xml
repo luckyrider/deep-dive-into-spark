@@ -6,15 +6,10 @@
     <artifactId>ddis-netty</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
-    <name>Echo App</name>
+    <name>Netty Apps</name>
     <description>
-        Build an Echo Server and Client
+        Netty Example Apps
     </description>
-
-    <modules>
-        <module>Client</module>
-        <module>Server</module>
-    </modules>
 
     <properties>
         <netty.version>4.1.12.Final</netty.version>

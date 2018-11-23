@@ -1,4 +1,4 @@
-package ddis.netty.echoserver;
+package ddis.netty.echo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

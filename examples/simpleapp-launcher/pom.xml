@@ -10,7 +10,7 @@
   <artifactId>simpleapp-launcher</artifactId>
   <version>0.1.0</version>
   <packaging>jar</packaging>
-  <name>Simple App Launcher</name>
+  <name>Simple Spark App Launcher</name>
 
   <prerequisites>
     <maven>3.2.5</maven>
