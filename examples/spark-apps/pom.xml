@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- Copyright 2015 and onwards Sanford Ryza, Juliet Hougland, Uri Laserson, Sean Owen and Joshua Wills
-
- See LICENSE file for further information.
- -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ddis</groupId>
-  <artifactId>simpleapp-launcher</artifactId>
+  <artifactId>spark-apps</artifactId>
   <version>0.1.0</version>
   <packaging>jar</packaging>
-  <name>Simple Spark App Launcher</name>
+  <name>Spark Apps</name>
 
   <prerequisites>
     <maven>3.2.5</maven>
@@ -62,7 +57,7 @@
           <recompressZippedFiles>false</recompressZippedFiles>
           <archive>
             <manifest>
-              <mainClass>ddis.simpleapp.SimpleApp</mainClass>
+              <mainClass>ddis.spark.apps.LineCounter</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -101,6 +96,7 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>${scala.complete.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
@@ -110,8 +106,9 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-launcher_${scala.minor.version}</artifactId>
+      <artifactId>spark-mllib_${scala.minor.version}</artifactId>
       <version>${spark.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

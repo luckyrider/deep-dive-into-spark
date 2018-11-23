@@ -1,4 +1,4 @@
-package ddis.simpleapp
+package ddis.spark.launcher
 
 import org.apache.spark.launcher.SparkLauncher
 import java.io.File
@@ -11,9 +11,9 @@ object SimpleAppRawChildProcessLauncher {
   def main(args: Array[String]): Unit = {
     val process = new SparkLauncher()
       .setAppResource(
-        new File("examples/simpleapp/target/simpleapp-0.1.0.jar").getCanonicalPath)
-      .setMainClass("ddis.simpleapp.SimpleApp")
-      .setAppName("ddis.simpleapp.SimpleApp (raw child process)")
+        new File("examples/spark-apps/target/spark-apps-0.1.0.jar").getCanonicalPath)
+      .setMainClass("ddis.spark.apps.LineCounter")
+      .setAppName("ddis.spark.apps.LineCounter (raw child process)")
       .setMaster("yarn")
       .setConf(SparkLauncher.DRIVER_MEMORY, "512m")
       .launch();

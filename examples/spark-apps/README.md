@@ -1,7 +1,7 @@
-Simple Spark Application
+Spark Applications
 ==============
 
-A simple Spark project that uses Maven for building.  The app simply counts the number of lines in
+Spark project that uses Maven for building.  The app simply counts the number of lines in
 a text file.
 
 To build a JAR:
@@ -10,11 +10,11 @@ To build a JAR:
 
 To run locally with Spark installed:
 
-    spark-submit --master local target/simpleapp-0.1.0-jar-with-dependencies.jar <input file>
+    spark-submit --master local target/spark-apps-0.1.0-jar-with-dependencies.jar <input file>
 
 To run a REPL that can reference the objects and classes defined in this project:
 
-    spark-shell --jars target/simpleapp-0.1.0-jar-with-dependencies.jar --master local
+    spark-shell --jars target/spark-apps-0.1.0-jar-with-dependencies.jar --master local
 
 The `--master local` argument means that the application will run in a single local process. If the
 cluster is running YARN, you can replace it with `--master yarn`.
