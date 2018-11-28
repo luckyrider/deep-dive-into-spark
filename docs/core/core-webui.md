@@ -12,6 +12,8 @@
 
 ![sparkui tabs and pages](core-sparkui-tabs-pages.png)
 
+![rdd operation graph](rdd-operation-graph.png)
+
 ### Source code Guide
 core/src/main/resources/org/apache/spark/ui/static/
 

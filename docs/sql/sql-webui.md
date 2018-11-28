@@ -5,6 +5,9 @@
 
 ## Design and Implementation
 
+![sql tab and pages](sqltab-pages.png)
+
+![sparkplan graph](sparkplan-graph.png)
 
 
 
