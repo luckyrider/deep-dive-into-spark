@@ -39,6 +39,8 @@ export PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 alias spark-2.1.0="export SPARK_HOME=$DEPLOY_BASE/spark-2.1.0-bin-hadoop2.7"
 alias spark-2.2.0="export SPARK_HOME=$DEPLOY_BASE/spark-2.2.0-bin-hadoop2.7"
 alias spark-2.3.1="export SPARK_HOME=$DEPLOY_BASE/spark-2.3.1-bin-hadoop2.7"
+alias spark-2.4.0="export SPARK_HOME=$DEPLOY_BASE/spark-2.4.0-bin-hadoop2.7"
+alias spark-3.0.0="export SPARK_HOME=$DEPLOY_BASE/spark-3.0.0-bin-hadoop2.7"
 
 # 3rd party
 export LIVY_HOME=$DEPLOY_BASE/livy-0.5.0-incubating-bin
