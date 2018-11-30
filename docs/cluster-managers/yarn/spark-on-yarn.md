@@ -1,6 +1,11 @@
 # Spark on YARN
 ## Overview
 
+
+## Design and Implementation
+
+![spark on yarn](clustermanager.yarn.png)
+
 ## FQA
 ### vcores
 
