@@ -1,5 +1,0 @@
-# Spark Core
-
-## Overview
-
-
