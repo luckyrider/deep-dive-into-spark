@@ -6,6 +6,10 @@
 
 ![spark on yarn](clustermanager.yarn.png)
 
+key classes:
+* org.apache.spark.deploy.yarn.ApplicationMaster
+* org.apache.spark.deploy.yarn.ExecutorLauncher is merely a wrapper of ApplicationMaster. This object does not provide any special functionality. It exists so that it's easy to tell apart the client-mode AM from the cluster-mode AM when using tools such as ps or jps.
+
 ## FQA
 ### vcores
 

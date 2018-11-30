@@ -35,3 +35,4 @@ At its core, Catalyst contains a general library for representing trees and appl
 * https://blog.imaginea.com/spark-2-0-sql-source-code-tour-part-3-implicit-cast-is-evil/
 * https://developer.ibm.com/code/2017/11/30/learn-extension-points-apache-spark-extend-spark-catalyst-optimizer/
 * https://issues.apache.org/jira/browse/SPARK-18127
+* https://github.com/ColZer/DigAndBuried/blob/master/spark/spark-catalyst.md
