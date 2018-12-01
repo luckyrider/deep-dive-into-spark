@@ -1,4 +1,4 @@
-# Distributed System Fundamentals
+# Distributed System
 
 ## Overview
 * Consensus

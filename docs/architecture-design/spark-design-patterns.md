@@ -1,10 +1,10 @@
-# Design Patterns in Spark
+# Spark Design Patterns
 
 ## Overview
 
 
 
-## Patterns
+## GOF Patterns
 
 ### Visitor
 

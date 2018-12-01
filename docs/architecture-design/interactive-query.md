@@ -31,6 +31,12 @@ Snowflake:
 * https://www.snowflake.com/blog/snowflake-spark-part-2-pushing-query-processing/
 * http://info.snowflake.net/rs/252-RFO-227/images/Snowflake_SIGMOD.pdf
 
+Alibaba:
+* 基于Druid和Drill的OLAP引擎. 阿里巴巴. http://strata.oreilly.com.cn/hadoop-big-data-cn/hadoop-big-data-cn/public/schedule/detail/52345
+
+Talking Data:
+* 海量数据OLAP分析实践—-TD Atom Cube. http://chinahadoop.com/archives/2096
+
 ## Indexing
 * https://databricks.com/session/apache-carbondata-an-indexed-columnar-file-format-for-interactive-query-with-spark-sql
 
@@ -39,3 +45,12 @@ Snowflake:
 ## JDBC/ODBC Server
 * http://www.russellspitzer.com/2017/05/19/Spark-Sql-Thriftserver/
 
+## Misc
+* vectorization (columnar reads)
+* predicate pushdown
+* lazy materialization on read (lazy reads)
+
+References:
+
+* https://code.facebook.com/posts/370832626374903/even-faster-data-at-the-speed-of-presto-orc/
+* http://techblog.netflix.com/2014/10/using-presto-in-our-big-data-platform.html
