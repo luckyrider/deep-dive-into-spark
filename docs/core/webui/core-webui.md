@@ -202,9 +202,10 @@ spark-sql-viz uses:
 </div>
 ```
 
+## Misc
 
-
-
-
-
+### Skipped stages
+* http://stackoverflow.com/questions/34580662/what-does-stage-skipped-mean-in-apache-spark-web-ui
+* https://github.com/apache/spark/pull/3009
+* http://blog.csdn.net/u012684933/article/details/50378725
 

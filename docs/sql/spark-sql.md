@@ -122,3 +122,9 @@ OPTIONS (
 * https://databricks.com/blog/2015/01/09/spark-sql-data-sources-api-unified-data-access-for-the-spark-platform.html
 * https://github.com/datastax/spark-cassandra-connector/blob/master/doc/14_data_frames.md
 * https://github.com/datastax/spark-cassandra-connector/blob/master/spark-cassandra-connector/src/main/scala/org/apache/spark/sql/cassandra/DefaultSource.scala
+
+## References
+* Deep Dive into Spark SQL’s Catalyst Optimizer. https://databricks.com/blog/2015/04/13/deep-dive-into-spark-sqls-catalyst-optimizer.html
+* http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf
+* https://databricks.com/blog/2015/04/24/recent-performance-improvements-in-apache-spark-sql-python-dataframes-and-more.html
+* https://databricks.com/blog/2015/04/28/project-tungsten-bringing-spark-closer-to-bare-metal.html

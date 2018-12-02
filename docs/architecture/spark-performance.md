@@ -1,85 +1,20 @@
-# Spark Notes
-
+# Spark Performance
 
 ## Overview
 
-* Spark 1.x and 2.x
-* configuration
-* Core
-* application server
-* Performance tuning
-* Toubleshooting
-* reference
+## Performance Improvements
 
-## Spark 1.x and 2.x
+## Performance Benchmark
+HiBench features many benchmarks within it that exercise several components of Spark (great for stressing core, sql, MLlib capabilities), SparkSqlPerf features 99 TPC-DS queries (stressing the DataFrame API and therefore the Catalyst optimiser), both work well with Spark 2 
 
-### spark 2.0
-small files:
+* HiBench: https://github.com/intel-hadoop/HiBench
+* SparkSqlPerf: https://github.com/databricks/spark-sql-perf
 
-* https://issues.apache.org/jira/browse/SPARK-13664
-* https://issues.apache.org/jira/browse/SPARK-8813
-* https://issues.apache.org/jira/browse/SPARK-8812
+micro benchmark:
 
-## shell scripts
-
-spark-shell:
-
-```
-org.apache.spark.deploy.SparkSubmit --master local --class org.apache.spark.repl.Main --name "Spark shell spark-shell"
-```
-
-
-## Configuration
-
-### classpath
-SPARK_CLASSPATH was deprecated. see more at org.apache.spark.SparkConf.
-
-```
-sys.env.get("SPARK_CLASSPATH").foreach { value =>
-  val warning =
-    s"""
-      |SPARK_CLASSPATH was detected (set to '$value').
-      |This is deprecated in Spark 1.0+.
-      |
-      |Please instead use:
-      | - ./spark-submit with --driver-class-path to augment the driver classpath
-      | - spark.executor.extraClassPath to augment the executor classpath
-    """.stripMargin
-  logWarning(warning)
-```
-
-```
-org.apache.spark.launcher
-  AbstractCommandBuilder
-    SparkClassCommandBuilder
-    SparkSubmitCommandBuilder
-```
-
-AbstractCommandBuilder#buildClassPath:
-
-```
-getenv("SPARK_CLASSPATH") <- 
-appClassPath              <- 
-getConfDir()              <- 
-getenv("SPARK_PREPEND_CLASSES")
-addToClassPath(cp, getenv("HADOOP_CONF_DIR"));
-addToClassPath(cp, getenv("YARN_CONF_DIR"));
-addToClassPath(cp, getenv("SPARK_DIST_CLASSPATH"));
-```
-
-SPARK_DIST_CLASSPATH的使用，见Using Spark's "Hadoop Free" Build. https://spark.apache.org/docs/latest/hadoop-provided.html
-
-## Core
-
-### Skipped stages
-* http://stackoverflow.com/questions/34580662/what-does-stage-skipped-mean-in-apache-spark-web-ui
-* https://github.com/apache/spark/pull/3009
-* http://blog.csdn.net/u012684933/article/details/50378725
+* https://github.com/apache/spark/tree/master/sql/core/src/test/scala/org/apache/spark/sql/execution/benchmark
 
 ## Performance Tuning
-
-
-## Troubleshooting
 
 ### OOM
 
@@ -142,26 +77,9 @@ java.lang.OutOfMemoryError: GC overhead limit exceeded
 
 solution: increase driver heap memory
 
-## References
+### small files
 
-Cluster Manager:
-
-* http://stackoverflow.com/questions/28664834/which-cluster-type-should-i-choose-for-spark
-* http://www.slideshare.net/SparkSummit/wampler-chen
-
-Spark SQL:
-
-* Deep Dive into Spark SQL’s Catalyst Optimizer. https://databricks.com/blog/2015/04/13/deep-dive-into-spark-sqls-catalyst-optimizer.html
-* http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf
-
-Performance:
-
-* https://databricks.com/blog/2015/04/24/recent-performance-improvements-in-apache-spark-sql-python-dataframes-and-more.html
-* https://databricks.com/blog/2015/04/28/project-tungsten-bringing-spark-closer-to-bare-metal.html
-
-Job Server:
-
-* https://github.com/spark-jobserver/spark-jobserver
-* Using Apache Spark to serve real time web services queries. http://stackoverflow.com/questions/30653571/using-apache-spark-to-serve-real-time-web-services-queries
-* http://www.slideshare.net/SparkSummit/productionizing-spark-and-the-rest-job-server-evan-chan
+* https://issues.apache.org/jira/browse/SPARK-13664
+* https://issues.apache.org/jira/browse/SPARK-8813
+* https://issues.apache.org/jira/browse/SPARK-8812
 
