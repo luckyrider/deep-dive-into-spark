@@ -91,5 +91,10 @@ The first unrecognized option is treated as the "primary resource". Everything e
 > --name ddis.simpleapp.SimpleApp (with handle) target/simpleapp-0.1.0-jar-with-dependencies.jar README.md
 
 ## Launch an application programmatically
+![launcher](launcher.png)
+
+## Command builder
+![command builder](command-builder.png)
+
 
 
