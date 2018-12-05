@@ -17,3 +17,9 @@ spark/pom.xml (as of 2.4)
 * SPARK-6305. Add support for log4j 2.x to Spark.
 * https://logging.apache.org/log4j/2.x/manual/migration.html
 * https://logging.apache.org/log4j/2.x/manual/architecture.html
+
+## FAQ
+
+### guard statement and performance
+* https://stackoverflow.com/questions/963492/in-log4j-does-checking-isdebugenabled-before-logging-improve-performance
+* https://stackoverflow.com/questions/105852/conditional-logging-with-minimal-cyclomatic-complexity/105908#105908
