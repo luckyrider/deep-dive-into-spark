@@ -3,7 +3,7 @@
 ## Overview
 
 
-## log4j 1.2
+## Design and Implementation
 
 spark/pom.xml (as of 2.4)
 
@@ -11,8 +11,18 @@ spark/pom.xml (as of 2.4)
 <log4j.version>1.2.17</log4j.version>
 ```
 
+`Logging` is initialized in 2 ways:
 
-## log4j2
+1. non-interpreter
+    * `Logging.initializeLogIfNecessary(false)`
+2. interpreter
+    * `org.apache.spark.repl.Main.initializeLogIfNecessary(true)`
+    * `org.apache.spark.api.python.PythonGatewayServer.initializeLogIfNecessary(true)`
+    * `org.apache.spark.api.r.RBackend.initializeLogIfNecessary(true)`
+
+## Evolution
+
+### log4j2
 
 * SPARK-6305. Add support for log4j 2.x to Spark.
 * https://logging.apache.org/log4j/2.x/manual/migration.html
