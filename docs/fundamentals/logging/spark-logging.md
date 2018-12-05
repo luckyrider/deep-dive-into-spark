@@ -22,6 +22,9 @@ spark/pom.xml (as of 2.4)
 
 ## Evolution
 
+### Persist Driver Logs in Client mode to HDFS
+[SPARK-25118](https://issues.apache.org/jira/browse/SPARK-25118)
+
 ### log4j2
 
 * SPARK-6305. Add support for log4j 2.x to Spark.
