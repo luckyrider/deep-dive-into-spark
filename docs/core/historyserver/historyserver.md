@@ -6,5 +6,4 @@
 
 ## Design and Implementation
 
-![history server](core-historyserver.png)
-
+![history server](historyserver.png)

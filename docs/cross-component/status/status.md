@@ -1,4 +1,4 @@
-# Core App Status Management
+# App Status
 
 ## Overview
 
