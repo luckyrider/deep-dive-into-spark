@@ -34,7 +34,7 @@
     },
     "Spark Properties": {
       "spark.driver.host": "10.236.90.209",
-      "spark.history.fs.logDirectory": "file:///Users/cmao/Workspace/deploy/spark-eventlog",
+      "spark.history.fs.logDirectory": "file:///Users/cmao/Workspace/deploy/spark-events",
       "spark.sql.autoBroadcastJoinThreshold": "-1",
       "spark.eventLog.enabled": "true",
       "spark.driver.port": "50076",
@@ -48,7 +48,7 @@
       "spark.submit.deployMode": "client",
       "spark.master": "local[*]",
       "spark.executor.memory": "512m",
-      "spark.eventLog.dir": "file:///Users/cmao/Workspace/deploy/spark-eventlog",
+      "spark.eventLog.dir": "file:///Users/cmao/Workspace/deploy/spark-events",
       "spark.dynamicAllocation.enabled": "true",
       "spark.sql.catalogImplementation": "hive",
       "spark.app.id": "local-1544147071900",
