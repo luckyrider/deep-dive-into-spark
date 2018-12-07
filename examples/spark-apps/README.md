@@ -16,13 +16,13 @@ val sparkStatus = Seq(
     (500, "Vice President"),
     (250, "PMC Member"),
     (100, "Contributor")).toDF("id", "status")
-person.write.format("parquet").saveAsTable("person")
-graduateProgram.write.format("parquet").saveAsTable("graduate_program")
-sparkStatus.write.format("parquet").saveAsTable("spark_status")
+person.repartition(2, 'id).write.mode("overwrite").format("parquet").saveAsTable("person")
+graduateProgram.repartition(2, 'id).write.mode("overwrite").format("parquet").saveAsTable("graduate_program")
+sparkStatus.repartition(2, 'id).write.mode("overwrite").format("parquet").saveAsTable("spark_status")
 ```
 
 ```
-spark-sql --conf spark.sql.autoBroadcastJoinThreshold=-1 --conf spark.sql.codegen.wholeStage=false
+spark-sql --conf spark.sql.autoBroadcastJoinThreshold=-1 --conf spark.sql.shuffle.partitions=2 --conf spark.sql.codegen.wholeStage=false
 ```
 
 join:
