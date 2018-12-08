@@ -29,7 +29,9 @@ When `SparkPlan` is mapped to `SparkPlanInfo`, which is further mapped to `Spark
 
 * [SPARK-26221 Improve Spark SQL instrumentation and metrics](https://issues.apache.org/jira/browse/SPARK-26221)
 
-## Coding
+## Misc
 
 * SQLMetricsSuite
 * SQLListenerSuite
+
+* Add CPU time metric to TaskMetrics. https://issues.apache.org/jira/browse/SPARK-12221

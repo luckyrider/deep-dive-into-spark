@@ -34,7 +34,6 @@
 
 ### livy-core
 
-## Misc
 
 ### Logging
 
@@ -42,6 +41,11 @@
 2. `yyyy_mm_dd.request.log`. WebServer uses `org.eclipse.jetty.server.handler.RequestLogHandler`, 
 in turn uses `org.eclipse.jetty.server.NCSARequestLog`.
 3. `livy.log`. configured via `$LIVY_CONF_DIR/log4j.properties`
+
+## Issues
+
+* [LIVY-489 Expose a JDBC endpoint for Livy](https://issues.apache.org/jira/browse/LIVY-489)
+* [LIVY-11 Enable HA support](https://issues.cloudera.org/browse/LIVY-11)
 
 ## References
 * https://github.com/spark-jobserver/spark-jobserver
