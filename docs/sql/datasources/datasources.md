@@ -1,14 +1,19 @@
-# Data Sources API
+# Data Sources
 
-## Data Source V1
+## Overview
+
+
+## Data Sources API
+
+### Data Source V1
 
 * Michael Armbrust. Spark SQL Data Sources API: Unified Data Access for the Apache Spark Platform. https://databricks.com/blog/2015/01/09/spark-sql-data-sources-api-unified-data-access-for-the-spark-platform.html
 * https://databricks.com/session/extending-apache-spark-sql-data-source-apis-with-join-push-down
 * http://sparkdatasourceapi.blogspot.nl/2016/10/spark-data-source-api-write-custom.html
 * https://github.com/VishvendraRana/spark-custom-datasource
-* https://michalsenkyr.github.io/2017/02/spark-sql_datasource
+* How to create a custom Spark SQL data source. https://michalsenkyr.github.io/2017/02/spark-sql_datasource
 
-## Data Source V2
+### Data Source V2
 
 Advances:
 
@@ -24,7 +29,10 @@ Articles:
 * https://ndolgov.blogspot.com/2017/12/spark-data-source-api-v2-read-query.html
 * http://blog.madhukaraphatak.com/anatomy-of-spark-datasource-api/
 
-## Reference Implementation
+### Reference Implementation
 
 * https://github.com/apache/carbondata
 * https://github.com/Netflix/iceberg
+
+
+

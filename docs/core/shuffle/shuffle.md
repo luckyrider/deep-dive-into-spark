@@ -23,3 +23,6 @@ org.apache.spark.shuffle.FetchFailedException: failed to allocate  byte(s) of di
 * https://netty.io/4.0/xref/io/netty/util/internal/PlatformDependent.html
 
 
+## References
+
+* SOS: Optimizing Shuffle I/O. https://databricks.com/session/sos-optimizing-shuffle-i-o
