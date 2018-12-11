@@ -77,7 +77,7 @@ java.lang.OutOfMemoryError: GC overhead limit exceeded
 
 solution: increase driver heap memory
 
-### small files
+### Too Many Small Files
 
 * https://issues.apache.org/jira/browse/SPARK-13664
 * https://issues.apache.org/jira/browse/SPARK-8813

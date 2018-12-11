@@ -3,15 +3,14 @@
 ## Overview
 
 
-## design
+## Design and Implementation
 
 https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-whole-stage-codegen.html
 
-## Implementation
-Decouple the generated codes of consuming rows in operators under whole-stage codegen
+* Decouple the generated codes of consuming rows in operators under whole-stage codegen
 https://issues.apache.org/jira/browse/SPARK-21717
 
-"distribute by" on multiple columns may lead to codegen issue
+* "distribute by" on multiple columns may lead to codegen issue
 https://issues.apache.org/jira/browse/SPARK-25084
 
 ## Configuration
@@ -32,3 +31,8 @@ e.g.
 
 * spark.sql.codegen.hugeMethodLimit 65535
 * spark.sql.codegen.splitConsumeFuncByOperator true
+
+## Evolution
+
+* SPIP: Structured Intermediate Representation (Tungsten IR) for generating Java code
+https://issues.apache.org/jira/browse/SPARK-25728
