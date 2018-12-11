@@ -1,4 +1,4 @@
-# RDD
+# Plans
 
 ## Overview
 
@@ -6,6 +6,7 @@
 
 ## Design and Implementation
 
-![RDD](rdd.png)
 
+
+## References
 
