@@ -5,19 +5,25 @@
 
 ## Design and Implementation
 
-### Schedulers
-![Scheduler](scheduler.png)
+### Scheduler overview
 
-![cluster scheduler](scheduler.cluster.png)
+`DAGScheduler`, `TaskScheduler` and `SchedulerBackend`:
 
-![local scheduler](scheduler.local.png)
+![Scheduler](scheduler-overview.png)
+
+The interaction when an RDD action is invoked:
+
+![RDD action scheduler sequence](rdd-action-scheduler-sequence.png)
+
 
 ### DAGScheduler
 
 ![DAGScheduler](DAGScheduler.png)
 
-![RDD.action](RDD-and-DAGScheduler.png)
 
-### TaskScheduler
+### TaskScheduler and SchedulerBackend
 
-![TaskScheduler](TaskScheduler.png)
+![TaskScheduler and SchedulerBackend](TaskScheduler&SchedulerBackend.png)
+
+## Evolution
+
