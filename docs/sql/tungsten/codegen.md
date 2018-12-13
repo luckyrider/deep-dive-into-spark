@@ -5,13 +5,18 @@
 
 ## Design and Implementation
 
-https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-whole-stage-codegen.html
+![CodegenSupport](CodegenSupport.png)
 
-* Decouple the generated codes of consuming rows in operators under whole-stage codegen
-https://issues.apache.org/jira/browse/SPARK-21717
+Several special `CodegenSupport`
 
-* "distribute by" on multiple columns may lead to codegen issue
-https://issues.apache.org/jira/browse/SPARK-25084
+* `WholeStageCodegenExec`. WholeStageCodegen compiles a subtree of plans that support codegen
+  together into single Java function.
+* `BlockingOperatorWithCodegen`. A special kind of operators which support whole stage codegen.
+  Blocking means these operators will consume all the inputs first, before producing output. Typical
+  blocking operators are sort and aggregate.
+* `InputAdapter`. InputAdapter is used to hide a SparkPlan from a subtree that supports codegen.
+  This is the leaf node of a tree with WholeStageCodegen that is used to generate code that consumes
+  an RDD iterator of InternalRow. 
 
 ## Configuration
 
@@ -34,5 +39,13 @@ e.g.
 
 ## Evolution
 
-* SPIP: Structured Intermediate Representation (Tungsten IR) for generating Java code
+* Decouple the generated codes of consuming rows in operators under whole-stage codegen.
+https://issues.apache.org/jira/browse/SPARK-21717
+* "distribute by" on multiple columns may lead to codegen issue.
+https://issues.apache.org/jira/browse/SPARK-25084
+* SPIP: Structured Intermediate Representation (Tungsten IR) for generating Java code.
 https://issues.apache.org/jira/browse/SPARK-25728
+
+
+## References
+* https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-whole-stage-codegen.html

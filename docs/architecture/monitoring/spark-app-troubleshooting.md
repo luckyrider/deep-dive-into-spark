@@ -20,6 +20,7 @@
 ## References
 
 User:
+* Spark from the trenches — Part II. https://medium.com/teads-engineering/spark-from-the-trenches-part-2-f2ff9ab67ea1
 * Dealing with null in Spark. https://medium.com/@mrpowers/dealing-with-null-in-spark-cfdbb12f231e
 * FetchFailedException or MetadataFetchFailedException when processing big data set. https://stackoverflow.com/questions/34941410/fetchfailedexception-or-metadatafetchfailedexception-when-processing-big-data-se
 * Spark Shuffle FetchFailedException解决方案. https://www.jianshu.com/p/edd3ccc46980
