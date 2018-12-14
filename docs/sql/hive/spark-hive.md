@@ -13,6 +13,39 @@ Combine small files:
 
 https://issues.apache.org/jira/browse/SPARK-14259
 
+
+## Design and Implementation
+
+### SparkSQLCLIDriver
+![SparkSQLCLIDriver classes](SparkSQLCLIDriver-classes.png)
+
+![SparkSQLCLIDriver sequence](SparkSQLCLIDriver-sequence.png)
+
+Run:
+
+```
+spark-sql> select * from t1;
+```
+
+Thread stacktrace:
+
+```
+org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver.processCmd(SparkSQLCLIDriver.scala:364)
+org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:376)
+org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver$.main(SparkSQLCLIDriver.scala:272)
+org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver.main(SparkSQLCLIDriver.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)
+org.apache.spark.deploy.SparkSubmit$.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:894)
+org.apache.spark.deploy.SparkSubmit$.doRunMain$1(SparkSubmit.scala:198)
+org.apache.spark.deploy.SparkSubmit$.submit(SparkSubmit.scala:228)
+org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:137)
+org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+```
+
 ## FQA
 ### what is the difference between org.spark-project.hive and org.apache.hadoop.hive
 
