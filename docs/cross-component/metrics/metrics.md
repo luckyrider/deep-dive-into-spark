@@ -27,6 +27,7 @@ When `SparkPlan` is mapped to `SparkPlanInfo`, which is further mapped to `Spark
 
 ## Evolution
 
+* [SPARK-8856 Better instrumentation and visualization for physical plan (Spark 1.5)](https://issues.apache.org/jira/browse/SPARK-8856)
 * [SPARK-26221 Improve Spark SQL instrumentation and metrics](https://issues.apache.org/jira/browse/SPARK-26221)
 
 ## Misc
