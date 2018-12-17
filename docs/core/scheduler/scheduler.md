@@ -5,6 +5,23 @@
 
 ## Design and Implementation
 
+### RDD
+`RDD`:
+
+![RDD](rdd.png)
+
+`Partition`:
+
+![Partition](Partition.png)
+
+`Dependency`:
+
+![Dependency](Dependency.png)
+
+`Partitioner`:
+
+![Partitioner](Partitioner.png)
+
 ### Scheduler overview
 
 `DAGScheduler`, `TaskScheduler` and `SchedulerBackend`:
