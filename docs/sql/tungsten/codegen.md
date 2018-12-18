@@ -18,7 +18,12 @@ Several special `CodegenSupport`
   This is the leaf node of a tree with WholeStageCodegen that is used to generate code that consumes
   an RDD iterator of InternalRow. 
 
-## Configuration
+### Whole-stage Codegen
+`CollapseCodegenStages` finds the chained plans that support codegen, collapse them together as
+`WholeStageCodegen` if `spark.sql.codegen.wholeStage` is set to true. Whole-stage codegen means the
+whole stage (of multiple operators) will be compiled into single java method.
+
+### Configuration
 
 * spark.sql.codegen.wholeStage true
 * spark.sql.codegen.useIdInClassName true
