@@ -1,6 +1,7 @@
 # Spark Architecture
 
-Architectural design principles, methodologies, patterns and best practices to tackle
+## Overview
+Architectural design principles, patterns and best practices to tackle
 complexity of such a sophisticated distributed system.
 
 * Performance and scalability
@@ -9,3 +10,7 @@ complexity of such a sophisticated distributed system.
 * Evolution
 * Usability
 * Design patterns
+
+## Components
+
+![Spark Components](spark-components.png)
