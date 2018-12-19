@@ -68,6 +68,10 @@ A `SparkPlan` is used in two ways:
 * as a cluster in RDDOperationGraph since it is a RDDOperationScope.
 * as a node (e.g. ProjectExec) or a cluster (e.g. WholeStageCodegenExec) SparkPlanGraph.
 
+SparkPlan and Stage relationship in a query looks like:
+
+![SparkPlan and Stage relationship](SparkPlan-Stage-in-Query.png)
+
 ### DAG Visualization
 `core/src/main/resources/org/apache/spark/ui/static/`
 
