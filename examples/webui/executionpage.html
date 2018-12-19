@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://localhost:4040/SQL/execution/?id=0 -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="./executionpage_files/bootstrap.min.css" type="text/css">
+      <link rel="stylesheet" href="./executionpage_files/webui.css" type="text/css">
+      <script src="./executionpage_files/jquery-1.11.1.min.js"></script>
+      <script src="./executionpage_files/bootstrap-tooltip.js"></script>
+      <script src="./executionpage_files/initialize-tooltips.js"></script>
+      <script src="./executionpage_files/webui.js"></script>
+      <script>setUIRoot('')</script>
+      <title>Details for Query 0</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+
+      <!-- part 1: query title -->
+      <div class="row-fluid">
+        <div class="span12">
+          <h3 style="vertical-align: bottom; display: inline-block;">
+            Details for Query 0
+          </h3>
+        </div>
+      </div>
+      
+      <!-- part 2: query summary -->
+      <div> 
+        <ul class="unstyled">
+          <li>
+            <strong>Submitted Time: </strong>2018/12/19 14:14:13
+          </li>
+          <li>
+            <strong>Duration: </strong>3 s
+          </li>
+          
+          <li>
+            <strong>Succeeded Jobs: </strong>
+            <a href="">0</a><span>&nbsp;</span><a href="">1</a><span>&nbsp;</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- part 3: query plan viz (graph, metadata, css, js) -->
+      <div>
+        <div id="plan-viz-graph"></div>
+        <div id="plan-viz-metadata" style="display:none"> <!-- metadata: dot file, meta data for node tooltip -->
+          <div class="dot-file">
+          digraph G {
+
+  subgraph cluster0 {
+    label="WholeStageCodegen\n\n\n11 ms (4 ms, 7 ms, 7 ms)";
+      1 [label="Project"];    
+  2 [label="SortMergeJoin\n \nnumber of output rows: 3"];
+  }
+     
+
+  subgraph cluster3 {
+    label="WholeStageCodegen\n\n\n148 ms (72 ms, 76 ms, 76 ms)";
+      4 [label="Sort\n \nsort time total (min, med, max): \n0 ms (0 ms, 0 ms, 0 ms)\npeak memory total (min, med, max): \n2.1 MiB (64.0 KiB, 2.1 MiB, 2.1 MiB)\nspill size total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)"];
+  }
+     
+  5 [label="Exchange\n \nshuffle records written: 3\nshuffle write time total (min, med, max): \n16 ms (8 ms, 8 ms, 8 ms)\nrecords read: 3\nlocal bytes read total (min, med, max): \n188.0 B (188.0 B, 188.0 B, 188.0 B)\nfetch wait time total (min, med, max): \n0 ms (0 ms, 0 ms, 0 ms)\nremote bytes read total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)\nlocal blocks read: 2\nremote blocks read: 0\ndata size total (min, med, max): \n142.0 B (47.0 B, 95.0 B, 95.0 B)\nremote bytes read to disk total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)\nshuffle bytes written total (min, med, max): \n187.0 B (83.0 B, 104.0 B, 104.0 B)"];
+
+  subgraph cluster6 {
+    label="WholeStageCodegen\n\n\n720 ms (360 ms, 360 ms, 360 ms)";
+      7 [label="Project"];    
+  8 [label="Filter\n \nnumber of output rows: 3"];    
+  9 [label="Scan parquet default.person\n \nnumber of output rows: 3\nnumber of files: 2\nfile listing time (ms): 0\nscan time total (min, med, max): \n608 ms (304 ms, 304 ms, 304 ms)"];
+  }
+     
+
+  subgraph cluster10 {
+    label="WholeStageCodegen\n\n\n30 ms (30 ms, 30 ms, 30 ms)";
+      11 [label="Sort\n \nsort time total (min, med, max): \n0 ms (0 ms, 0 ms, 0 ms)\npeak memory total (min, med, max): \n2.1 MiB (2.1 MiB, 2.1 MiB, 2.1 MiB)\nspill size total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)"];
+  }
+     
+  12 [label="Exchange\n \nshuffle records written: 3\nshuffle write time total (min, med, max): \n16 ms (8 ms, 8 ms, 8 ms)\nrecords read: 2\nlocal bytes read total (min, med, max): \n168.0 B (79.0 B, 89.0 B, 89.0 B)\nfetch wait time total (min, med, max): \n0 ms (0 ms, 0 ms, 0 ms)\nremote bytes read total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)\nlocal blocks read: 2\nremote blocks read: 0\ndata size total (min, med, max): \n118.0 B (39.0 B, 79.0 B, 79.0 B)\nremote bytes read to disk total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)\nshuffle bytes written total (min, med, max): \n168.0 B (79.0 B, 89.0 B, 89.0 B)"];
+
+  subgraph cluster13 {
+    label="WholeStageCodegen\n\n\n710 ms (355 ms, 355 ms, 355 ms)";
+      14 [label="Project"];    
+  15 [label="Filter\n \nnumber of output rows: 3"];    
+  16 [label="Scan parquet default.graduate_program\n \nnumber of output rows: 3\nnumber of files: 2\nfile listing time (ms): 0\nscan time total (min, med, max): \n607 ms (303 ms, 304 ms, 304 ms)"];
+  }
+     
+  17 [label="Subquery\n \ndata size (bytes): 16\ntime to collect (ms): 1,934"];
+
+  subgraph cluster18 {
+    label="WholeStageCodegen\n\n\n17 ms (17 ms, 17 ms, 17 ms)";
+      19 [label="HashAggregate\n \naggregate time total (min, med, max): \n16 ms (16 ms, 16 ms, 16 ms)\nnumber of output rows: 1"];
+  }
+     
+  20 [label="Exchange\n \nshuffle records written: 2\nshuffle write time total (min, med, max): \n26 ms (13 ms, 13 ms, 13 ms)\nrecords read: 2\nlocal bytes read total (min, med, max): \n117.0 B (117.0 B, 117.0 B, 117.0 B)\nfetch wait time total (min, med, max): \n0 ms (0 ms, 0 ms, 0 ms)\nremote bytes read total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)\nlocal blocks read: 2\nremote blocks read: 0\ndata size total (min, med, max): \n30.0 B (15.0 B, 15.0 B, 15.0 B)\nremote bytes read to disk total (min, med, max): \n0.0 B (0.0 B, 0.0 B, 0.0 B)\nshuffle bytes written total (min, med, max): \n116.0 B (58.0 B, 58.0 B, 58.0 B)"];
+
+  subgraph cluster21 {
+    label="WholeStageCodegen\n\n\n352 ms (176 ms, 176 ms, 176 ms)";
+      22 [label="HashAggregate\n \naggregate time total (min, med, max): \n319 ms (159 ms, 160 ms, 160 ms)\nnumber of output rows: 2"];    
+  23 [label="Scan parquet default.person\n \nnumber of output rows: 3\nnumber of files: 2\nfile listing time (ms): 2\nscan time total (min, med, max): \n319 ms (159 ms, 160 ms, 160 ms)"];
+  }
+     
+  2-&gt;1;
+
+  4-&gt;2;
+
+  5-&gt;4;
+
+  7-&gt;5;
+
+  8-&gt;7;
+
+  9-&gt;8;
+
+  11-&gt;2;
+
+  12-&gt;11;
+
+  14-&gt;12;
+
+  15-&gt;14;
+
+  16-&gt;15;
+
+  17-&gt;1;
+
+  19-&gt;17;
+
+  20-&gt;19;
+
+  22-&gt;20;
+
+  23-&gt;22;
+
+}
+          </div> <!-- dot-file -->
+          <div id="plan-viz-metadata-size">24</div>
+          <div id="plan-meta-data-1">Project [id#2, name#3, school#9, Subquery subquery0 AS total#1L]</div>
+          <div id="plan-meta-data-2">SortMergeJoin [graduate_program#4], [id#6], Inner</div>
+          <div id="plan-meta-data-0">WholeStageCodegen</div>
+          <div id="plan-meta-data-4">Sort [graduate_program#4 ASC NULLS FIRST], false, 0</div>
+          <div id="plan-meta-data-3">WholeStageCodegen</div>
+          <div id="plan-meta-data-5">Exchange hashpartitioning(graduate_program#4, 2)</div>
+          <div id="plan-meta-data-7">Project [id#2, name#3, graduate_program#4]</div>
+          <div id="plan-meta-data-8">Filter isnotnull(graduate_program#4)</div>
+          <div id="plan-meta-data-9">FileScan parquet default.person[id#2,name#3,graduate_program#4] Batched: true, DataFilters: [isnotnull(graduate_program#4)], Format: Parquet, Location: InMemoryFileIndex[file:/user/hive/warehouse/person], PartitionFilters: [], PushedFilters: [IsNotNull(graduate_program)], ReadSchema: struct&lt;id:int,name:string,graduate_program:int&gt;</div>
+          <div id="plan-meta-data-6">WholeStageCodegen</div>
+          <div id="plan-meta-data-11">Sort [id#6 ASC NULLS FIRST], false, 0</div>
+          <div id="plan-meta-data-10">WholeStageCodegen</div>
+          <div id="plan-meta-data-12">Exchange hashpartitioning(id#6, 2)</div>
+          <div id="plan-meta-data-14">Project [id#6, school#9]</div>
+          <div id="plan-meta-data-15">Filter isnotnull(id#6)</div>
+          <div id="plan-meta-data-16">FileScan parquet default.graduate_program[id#6,school#9] Batched: true, DataFilters: [isnotnull(id#6)], Format: Parquet, Location: InMemoryFileIndex[file:/user/hive/warehouse/graduate_program], PartitionFilters: [], PushedFilters: [IsNotNull(id)], ReadSchema: struct&lt;id:int,school:string&gt;</div>
+          <div id="plan-meta-data-13">WholeStageCodegen</div>
+          <div id="plan-meta-data-17">Subquery subquery0</div>
+          <div id="plan-meta-data-19">HashAggregate(keys=[], functions=[count(1)])</div>
+          <div id="plan-meta-data-18">WholeStageCodegen</div>
+          <div id="plan-meta-data-20">Exchange SinglePartition</div>
+          <div id="plan-meta-data-22">HashAggregate(keys=[], functions=[partial_count(1)])</div>
+          <div id="plan-meta-data-23">FileScan parquet default.person[] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/user/hive/warehouse/person], PartitionFilters: [], PushedFilters: [], ReadSchema: struct&lt;&gt;</div>
+          <div id="plan-meta-data-21">WholeStageCodegen</div>
+        </div> <!-- plan-viz-metadata -->
+        <link rel="stylesheet" href="./executionpage_files/spark-sql-viz.css" type="text/css">
+        <script src="./executionpage_files/d3.min.js"></script>
+        <script src="./executionpage_files/dagre-d3.min.js"></script>
+        <script src="./executionpage_files/graphlib-dot.min.js"></script>
+        <script src="./executionpage_files/spark-sql-viz.js"></script>
+        <script>$(function() { renderPlanViz(); })</script>
+      </div> <!-- query plan viz -->
+        
+    </div> <!-- container-fluid --> 
+  </body>
+</html>
