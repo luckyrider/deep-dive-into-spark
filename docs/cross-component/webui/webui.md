@@ -71,6 +71,11 @@ SparkPlan-Stage relationship in a query looks like:
 
 ![SparkPlan and Stage relationship](SparkPlan-Stage-in-Query.png)
 
+## Evolution
+* [SPARK-26098 Show associated SQL query in Job page](https://issues.apache.org/jira/browse/SPARK-26098)
+* [SPARK-26373 Spark UI 'environment' tab - column to indicate default vs overridden values](https://issues.apache.org/jira/browse/SPARK-26373)
+* [SPARK-26156 Revise summary section of stage page](https://issues.apache.org/jira/browse/SPARK-26156)
+
 ## Misc
 
 ### Skipped stages
