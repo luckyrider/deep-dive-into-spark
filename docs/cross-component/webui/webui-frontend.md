@@ -41,3 +41,9 @@ spark-sql-viz uses:
   render the graphs with the layout information from dagre. There are a few options for rendering:
   dagre-d3 is a D3-based renderer for dagre.
 * `d3.min.js`: renderer
+
+
+## References
+
+* [The DOT Language](https://www.graphviz.org/doc/info/lang.html)
+* [Scalable Vector Graphics (SVG) 1.1 (Second Edition)](https://www.w3.org/TR/SVG11/)

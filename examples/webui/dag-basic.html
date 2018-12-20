@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="./executionpage_files/bootstrap.min.css" type="text/css">
+      <link rel="stylesheet" href="./executionpage_files/webui.css" type="text/css">
+      <script src="./executionpage_files/jquery-1.11.1.min.js"></script>
+      <script src="./executionpage_files/bootstrap-tooltip.js"></script>
+      <script src="./executionpage_files/initialize-tooltips.js"></script>
+      <script src="./executionpage_files/webui.js"></script>
+      <link rel="stylesheet" href="./executionpage_files/spark-sql-viz.css" type="text/css">
+      <script src="./executionpage_files/d3.min.js"></script>
+      <script src="./executionpage_files/dagre-d3.min.js"></script>
+      <script src="./executionpage_files/graphlib-dot.min.js"></script>
+      <script src="./executionpage_files/spark-sql-viz.js"></script>
+      <title>DAG Basic</title>
+  </head>
+  <body>
+    <div id="plan-viz-graph"></div>
+  </body>
+  <script>
+var svg = d3.select("#plan-viz-graph").append("svg")
+var g = svg.append("g")
+
+var graph = graphlibDot.read("digraph { 1 [label=\"node 1\"]; 2 [label=\"node 2\"]; 1 -> 2 [label=\"label\"] }");
+console.log(graph)
+preprocessGraphLayout(graph)
+
+var renderer = new dagreD3.render();
+renderer(g, graph);
+
+// round the corners of rect
+svg
+  .selectAll("rect")
+  .attr("rx", "5")
+  .attr("ry", "5");
+
+resizeSvg(svg)
+  </script>
+</html>

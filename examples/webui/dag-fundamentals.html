@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <script src="./executionpage_files/d3.min.js"></script>
+      <title>DAG Fundamentals</title>
+  </head>
+  <body>
+    <p>paragraph 1</p>
+    <p>paragraph 2</p>
+    <p>paragraph 3</p>
+
+    <svg width="300" height="100">
+      <g>
+        <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+      </g>
+    </svg>
+    
+    <br/>
+    
+    <svg>
+      <g>
+        <rect width="300" height="100" rx="5" ry="5" style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)"/>
+      </g>
+    </svg>
+  </body>
+
+  <script>
+
+// DOM API examples
+/*
+var paragraphs = document.getElementsByTagName("p");
+for (var i = 0; i < paragraphs.length; i++) {
+  var paragraph = paragraphs.item(i);
+  paragraph.style.setProperty("color", "red", null);
+}
+*/
+
+// D3 (Data-Driven Documents) examples
+d3.selectAll("p").style("color", "red");
+
+d3.selectAll("p").style("color", function() {
+  return "hsl(" + Math.random() * 360 + ",100%,50%)";
+});
+
+d3.selectAll("p")
+  .data([10, 20, 30])
+    .style("font-size", function(d) { return d + "px"; });
+
+  </script>
+</html>
