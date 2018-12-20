@@ -76,6 +76,10 @@ SparkPlan-Stage relationship in a query looks like:
 * [SPARK-26373 Spark UI 'environment' tab - column to indicate default vs overridden values](https://issues.apache.org/jira/browse/SPARK-26373)
 * [SPARK-26156 Revise summary section of stage page](https://issues.apache.org/jira/browse/SPARK-26156)
 
+Issues:
+* [SPARK-18831 SQL tab missing from UI when using ElasticSearch connector](https://issues.apache.org/jira/browse/SPARK-18831)
+* [SPARK-17754 DataFrame reader and writer don't show Input/Output metrics in Spark UI](https://issues.apache.org/jira/browse/SPARK-17754)
+
 ## Misc
 
 ### Skipped stages
