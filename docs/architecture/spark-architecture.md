@@ -14,3 +14,8 @@ complexity of such a sophisticated distributed system.
 ## Components
 
 ![Spark Components](spark-components.png)
+
+2 level scheduling:
+
+* Cluster Manager: cluster level, inter-application
+* Driver: application level, intra-application

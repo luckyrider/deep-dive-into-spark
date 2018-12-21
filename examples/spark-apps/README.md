@@ -1,5 +1,18 @@
 # Spark Applications
 
+## RDD
+
+``
+val lines =
+  sc.textFile("file:///Users/cmao/Workspace/projects/github-seancxmao/spark/README.md")
+val words = lines.flatMap(line => line.split(" "))
+val wordTo1 = words.map(w => (w, 1))
+val counts = wordTo1.reduceByKey(_ + _)
+val someCounts = counts.take(10)
+// scalastyle:off println
+someCounts.foreach(println(_))
+``
+
 ## spark-sql Apps
 table population:
 

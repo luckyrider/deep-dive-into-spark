@@ -71,6 +71,16 @@ SparkPlan-Stage relationship in a query looks like:
 
 ![SparkPlan and Stage relationship](SparkPlan-Stage-in-Query.png)
 
+Some thoughts:
+
+* A query is split first into jobs. A broadcast operation or a scalar subquery runs as a separate job.
+* A job is further split into stages at the boundary inside `ShuffleExchange`. The boundary is
+  between shuffle write and shuffle read.
+* `ShuffleExchange` contains two RDDs, one for shuffle write and one for shuffle read.
+* `ShuffleExchange` could be reused and the stage where shuffle write exists could be skipped.
+* Some queries have no jobs, e.g. `CREATE OR REPLACE TEMPORARY VIEW`
+* 
+
 ## Evolution
 * [SPARK-26098 Show associated SQL query in Job page](https://issues.apache.org/jira/browse/SPARK-26098)
 * [SPARK-26373 Spark UI 'environment' tab - column to indicate default vs overridden values](https://issues.apache.org/jira/browse/SPARK-26373)
