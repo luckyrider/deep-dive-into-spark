@@ -1,4 +1,4 @@
-# App Status
+# App State Management
 
 ## Overview
 
@@ -6,8 +6,8 @@
 
 ## Design and Implementation
 
-### Status overview
-![status](status-overview.png)
+### State overview
+![state](state-overview.png)
 
 Spark tracks app status using `AppStatusListener` and tracks SQL app status using
 `SQLAppStatusListener`. These listeners write status finally into `KVStore`. On the other hand,
@@ -49,4 +49,10 @@ In Spark 2.1, Spark stores app status using listeners themselves (`JobProgressLi
 `RDDOperationGraphListener`, `ExecutorsListener`) instead of `AppStatusStore`. And Spark stores SQL
 app status using `SQLListener` instead of `SQLAppStatusStore`.
 
-![status (Spark 2.1)](status-2.1.png)
+![state (Spark 2.1)](state-2.1.png)
+
+
+## References
+
+* https://martinfowler.com/eaaDev/EventSourcing.html
+

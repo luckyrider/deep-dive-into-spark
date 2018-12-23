@@ -44,3 +44,7 @@ The interaction when an RDD action is invoked:
 
 ## Evolution
 
+
+## References
+
+* https://en.wikipedia.org/wiki/Event_loop
