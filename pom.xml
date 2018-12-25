@@ -12,5 +12,6 @@
     <module>examples/spark-apps-launcher</module>
     <module>examples/netty</module>
     <module>examples/jetty</module>
+    <module>examples/metrics</module>
   </modules>
 </project>
