@@ -26,12 +26,21 @@ When `SparkPlan` is mapped to `SparkPlanInfo`, which is further mapped to `Spark
 `SQLMetric` is mapped to `SQLMetricInfo`, which holds accumulator id.
 
 ## Evolution
+General
 
 * [SPARK-8856 Better instrumentation and visualization for physical plan (Spark 1.5)](https://issues.apache.org/jira/browse/SPARK-8856)
-* [SPARK-9103 Tracking spark's memory usage](https://issues.apache.org/jira/browse/SPARK-9103)
-* [SPARK-12221 Add CPU time metric to TaskMetrics](https://issues.apache.org/jira/browse/SPARK-12221)
-* [SPARK-23206 Additional Memory Tuning Metrics](https://issues.apache.org/jira/browse/SPARK-23206)
 * [SPARK-26221 Improve Spark SQL instrumentation and metrics](https://issues.apache.org/jira/browse/SPARK-26221)
+
+Memory
+
+* [SPARK-9103 Tracking spark's memory usage](https://issues.apache.org/jira/browse/SPARK-9103)
+* [SPARK-23206 Additional Memory Tuning Metrics](https://issues.apache.org/jira/browse/SPARK-23206)
+
+
+CPU
+
+* [SPARK-12221 Add CPU time metric to TaskMetrics](https://issues.apache.org/jira/browse/SPARK-12221)
+* [SPARK-25228 Add executor CPU Time metric](https://issues.apache.org/jira/browse/SPARK-25228)
 
 ## Misc
 
