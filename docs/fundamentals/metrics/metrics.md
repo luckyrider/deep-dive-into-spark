@@ -4,9 +4,6 @@
 
 
 ## Design and Implementation
-### Spark Metrics System
-![spark metrics](spark-metrics.png)
-
 
 ### Dropwizard Metrics
 
@@ -19,3 +16,7 @@
 * `Metered`: An object which maintains mean and exponentially-weighted rate.
 * `Histogram`: A metric which calculates the distribution of a value.
 * `MetricSet`: A set of named metrics.
+
+### References
+
+* https://github.com/dropwizard/metrics

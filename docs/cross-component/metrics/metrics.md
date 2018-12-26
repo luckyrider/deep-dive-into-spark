@@ -5,6 +5,13 @@
 
 ## Design and Implementation
 
+### Metrics System
+![metrics system](metrics-system.png)
+
+### Core Metrics
+
+
+
 ### SQL Metrics
 SQL metrics classes relationship:
 
