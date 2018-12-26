@@ -2,16 +2,22 @@
 
 ## RDD
 
-``
-val lines =
-  sc.textFile("file:///Users/cmao/Workspace/projects/github-seancxmao/spark/README.md")
+```
+val lines = sc.textFile("file:///Users/cmao/Workspace/projects/github-seancxmao/spark/README.md")
 val words = lines.flatMap(line => line.split(" "))
 val wordTo1 = words.map(w => (w, 1))
 val counts = wordTo1.reduceByKey(_ + _)
 val someCounts = counts.take(10)
 // scalastyle:off println
 someCounts.foreach(println(_))
-``
+```
+
+```
+// active/completed job and stage
+sc.parallelize(1 to 3, 3).map { n => Thread.sleep(10* 1000); n }.count
+// failed job and stage
+sc.parallelize(1 to 3, 3).map { n => Thread.sleep(10* 1000); throw new Exception() }.count
+```
 
 ## spark-sql Apps
 table population:
