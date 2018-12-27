@@ -33,3 +33,4 @@ The following are two known problems in jdk7u4+ with respect to the CodeCache fl
 ## References
 * Tungsten Phase 1. https://databricks.com/blog/2015/04/28/project-tungsten-bringing-spark-closer-to-bare-metal.html
 * Tungsten Phase 2: Speed up Apache Spark by 10X. https://databricks.com/blog/2016/05/23/apache-spark-as-a-compiler-joining-a-billion-rows-per-second-on-a-laptop.html
+* https://fr.slideshare.net/cfregly/advanced-apache-spark-meetup-project-tungsten-nov-12-2015

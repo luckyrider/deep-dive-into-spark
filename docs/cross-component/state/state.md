@@ -13,6 +13,10 @@ Spark tracks app status using `AppStatusListener` and tracks SQL app status usin
 `SQLAppStatusListener`. These listeners write status finally into `KVStore`. On the other hand,
 `AppStatusStore` and `SQLAppStatusStore` query `KVStore` to get app status.
 
+SQLAppStatusStore example:
+
+![SQLAppStatusStore](SQLAppStatusStore-instance.png)
+
 ### Spark Listener Types and Live Entities
 ![live entity](listener-types-live-entity.png)
 
