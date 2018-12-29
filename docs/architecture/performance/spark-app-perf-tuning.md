@@ -149,7 +149,44 @@ Docs:
 
 Key points:
 
-* ...
+* TPCDS, https://github.com/databricks/spark-sql-perf
+* Partition pruning
+  * PartitionCount, PartitionFilters
+* Column projection
+  * column-oriented data formats vs row-oriented data formats
+* Predicate push down.
+  * Predicate push down works by evaluating filtering predicates in the query against metadata
+    stored in the Parquet files. Parquet can optionally store statistics (in particular the minimum
+    and maximum value for a column chunk) in the relevant metadata section of its files and can use
+    that information to take decisions, for example, to skip reading chunks of data if the provided
+    filter predicate value in the query is outside the range of values stored for a given column.
+  * predicate push down does not happen for all datatypes in Parquet
+  * predicates on column of type DECIMAL are not pushed down, while INT (integer) values are pushed down
+  * Another important point is that only predicates using certain operators can be pushed down as
+    filters to Parquet. More details on the datatypes and operators that Spark can push down as
+    Parquet filters can be found in the source code (ParquetFilters.scala).
+  * even when filters are pushed down, the actual reduction of I/O and relative increase in 
+    performance vary: the results depend on the provided filter values and data distribution in the source table.
+  * the granularity at which Parquet stores metadata that can be used for predicate push down is called "row group"
+  * as Parquet matures more functionality will be added to predicate pushing
+    * Add Dictionary Based Filtering to Filter2 API. [PARQUET-384](https://issues.apache.org/jira/browse/PARQUET-384)
+  * spark.sql.parquet.filterPushdown
+* deep dive into Parquet
+  * ParquetOutputFormat.java
+  * Hierarchically, a Parquet file consists of one or more "row groups". A row group contains data
+    grouped ion "column chunks", one per column. Column chunks are structured in pages. Each column
+    chunk contains one or more pages.
+  * Parquet files have several metadata structures, containing among others the schema, the list of
+    columns and details about the data stored there, such as name and datatype of the columns, their
+    size, number of records and basic statistics as minimum and maximum value (for datatypes where
+    support for this is available, as discussed in the previous section).
+  * Parquet can use compression and encoding. The user can choose the compression algorithm used,
+    if any. By default Spark uses snappy. 
+  * Parquet can store complex data types and support nested structures.
+  * Parquet-tools. https://github.com/apache/parquet-mr
+  * Parquet-reader. https://github.com/apache/parquet-cpp
+* sparkMeasure. https://github.com/LucaCanali/sparkMeasure
+* Bonus material. questions and hints are very useful.
 
 ### More
 User
@@ -164,6 +201,6 @@ User
 * https://www.waitingforcode.com/apache-spark-sql/predicate-pushdown-spark-sql/read
 
 Deeper
-* Apache Spark 2.0 Performance Improvements Investigated With Flame Graphs. https://db-blog.web.cern.ch/blog/luca-canali/2016-09-spark-20-performance-improvements-investigated-flame-graphs
+
 * Deep Dive into Spark SQL with Advanced Performance Tuning. https://www.slideshare.net/databricks/deep-dive-into-spark-sql-with-advanced-performance-tuning-with-xiao-li-wenchen-fan
 

@@ -2,7 +2,6 @@
 
 ## Overview
 
-## Performance Improvements
 
 ## Performance Benchmark
 HiBench features many benchmarks within it that exercise several components of Spark (great for stressing core, sql, MLlib capabilities), SparkSqlPerf features 99 TPC-DS queries (stressing the DataFrame API and therefore the Catalyst optimiser), both work well with Spark 2 
@@ -14,7 +13,12 @@ micro benchmark:
 
 * https://github.com/apache/spark/tree/master/sql/core/src/test/scala/org/apache/spark/sql/execution/benchmark
 
-## Performance Tuning
+## Instrumentation, Monitoring and Profiling
+
+* http://db-blog.web.cern.ch/blog/luca-canali/2017-03-measuring-apache-spark-workload-metrics-performance-troubleshooting
+* https://db-blog.web.cern.ch/blog/luca-canali/2016-09-spark-20-performance-improvements-investigated-flame-graphs
+
+## Performance Tuning and Improvements
 
 ### OOM
 
