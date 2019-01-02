@@ -54,4 +54,29 @@ it means that there isn’t enough memory available for executing tasks, so you 
 amount of memory Spark uses for caching (spark.memory.fraction).
 
 There are many more tuning options described online, but at a high level, managing how frequently
-full garbage collection takes place can help in reducing the overhead. 
+full garbage collection takes place can help in reducing the overhead.
+
+When we cache an RDD, we cache the actual, physical data (i.e., the bits). The bits. When this data
+is accessed again, Spark returns the proper data. This is done through the RDD reference. However,
+in the Structured API, caching is done based on the physical plan. This means that we effectively
+store the physical plan as our key (as opposed to the object reference) and perform a lookup prior
+to the execution of a Structured job.
+
+Joins are a common area for optimization. The biggest weapon you have when it comes to optimizing
+joins is simply educating yourself about what each join does and how it’s performed. This will help
+you the most. Additionally, equi-joins are the easiest for Spark to optimize at this point and
+therefore should be preferred wherever possible. Beyond that, simple things like trying to use the
+filtering ability of inner joins by changing join ordering can yield large speedups. Additionally,
+using broadcast join hints can help Spark make intelligent planning decisions when it comes to
+creating query plans, as described in Chapter 8. Avoiding Cartesian joins or even full outer joins
+is often low-hanging fruit for stability and optimizations because these can often be optimized into
+different filtering style joins when you look at the entire data flow instead of just that one
+particular job area. Lastly, following some of the other sections in this chapter can have a
+significant effect on joins. For example, collecting statistics on tables prior to a join will help
+Spark make intelligent join decisions. Additionally, bucketing your data appropriately can also help
+Spark avoid large shuffles when joins are performed.
+
+In general, the main things you’ll want to prioritize are (1) reading as little data as possible
+through partitioning and efficient binary formats, (2) making sure there is sufficient parallellism
+and no data skew on the cluster using partitioning, and (3) using high-level APIs such as the
+Structured APIs as much as possible to take already optimized code.
