@@ -8,6 +8,33 @@ Apache Spark’s Philosophy
 * Computing engine
 * Libraries
 
+Spark is designed to support a wide range of data analytics tasks, ranging from simple data loading
+and SQL queries to machine learning and streaming computation, over the same computing engine and
+with a consistent set of APIs.
+
+Spark provides consistent, composable APIs that you can use to build an application out of smaller
+pieces or out of existing libraries. It also makes it easy for you to write your own analytics
+libraries on top. However, composable APIs are not enough: Spark’s APIs are also designed to enable
+high performance by optimizing across the different libraries and functions composed together in a
+user program.
+
+Why do we need a new engine and programming model for data analytics in the first place? As with 
+many trends in computing, this is due to changes in the economic factors that underlie computer
+applications and hardware.
+
+Unfortunately, this trend in hardware stopped around 2005: due to hard limits in heat dissipation, 
+hardware developers stopped making individual processors faster, and switched toward adding more 
+parallel CPU cores all running at the same speed. This change meant that suddenly applications 
+needed to be modified to add parallelism in order to run faster, which set the stage for new 
+programming models such as Apache Spark.
+
+The AMPlab had worked with multiple early MapReduce users to understand the benefits and drawbacks
+of this new programming model, and was therefore able to synthesize a list of problems across
+several use cases and begin designing more general computing platforms. In addition, Zaharia had
+also worked with Hadoop users at UC Berkeley to understand their needs for the platform—specifically,
+teams that were doing large-scale machine learning using iterative algorithms that need to make 
+multiple passes over the data.
+
 ## chapter 19. Performance Tuning
 Just as with monitoring, there are a number of different levels that you can try to tune at. For
 instance, if you had an extremely fast network, that would make many of your Spark jobs faster
