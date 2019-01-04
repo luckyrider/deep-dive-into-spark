@@ -35,6 +35,52 @@ also worked with Hadoop users at UC Berkeley to understand their needs for the p
 teams that were doing large-scale machine learning using iterative algorithms that need to make 
 multiple passes over the data.
 
+## Chapter 2. A Gentle Introduction to Spark
+A group of machines alone is not powerful, you need a framework to coordinate work across them. The
+cluster of machines that Spark will use to execute tasks is managed by a cluster manager.
+
+The driver process runs your main() function, sits on a node in the cluster, and is responsible for 
+three things: maintaining information about the Spark Application; responding to a user’s program or 
+input; and analyzing, distributing, and scheduling work across the executors (discussed momentarily). 
+The driver process is absolutely essential—it’s the heart of a Spark Application and maintains all 
+relevant information during the lifetime of the application.
+
+The executors are responsible for actually carrying out the work that the driver assigns them. This 
+means that each executor is responsible for only two things: executing code assigned to it by the 
+driver, and reporting the state of the computation on that executor back to the driver node.
+
+Spark supports a subset of the ANSI SQL 2003 standard. 
+
+When using Spark from Python or R, you don’t write explicit JVM instructions; instead, you write 
+Python and R code that Spark translates into code that it then can run on the executor JVMs.
+
+Although you can drive Spark from a variety of languages, what it makes available in those languages 
+is worth mentioning. Spark has two fundamental sets of APIs: the low-level “unstructured” APIs, and 
+the higher-level structured APIs.
+
+There is a one-to-one correspondence between a SparkSession and a Spark Application.
+
+The DataFrame concept is not unique to Spark. R and Python both have similar concepts. because Spark 
+has language interfaces for both Python and R, it’s quite easy to convert Pandas (Python) DataFrames 
+to Spark DataFrames, and R DataFrames to Spark DataFrames.
+
+The easiest and most efficient are DataFrames, which are available in all languages.
+
+There are two types of transformations: those that specify narrow dependencies, and those that 
+specify wide dependencies.
+
+A wide dependency (or wide transformation) style transformation will have input partitions 
+contributing to many output partitions. You will often hear this referred to as a shuffle whereby 
+Spark will exchange partitions across the cluster. With narrow transformations, Spark will 
+automatically perform an operation called pipelining, meaning that if we specify multiple filters on 
+DataFrames, they’ll all be performed in-memory. The same cannot be said for shuffles. When we 
+perform a shuffle, Spark writes the results to disk.
+
+To trigger the computation, we run an action. There are three kinds of actions:
+* Actions to view data in the console
+* Actions to collect data to native objects in the respective language
+* Actions to write to output data sources
+
 ## chapter 19. Performance Tuning
 Just as with monitoring, there are a number of different levels that you can try to tune at. For
 instance, if you had an extremely fast network, that would make many of your Spark jobs faster
