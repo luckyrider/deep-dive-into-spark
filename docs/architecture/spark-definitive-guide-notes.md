@@ -142,7 +142,7 @@ and inspect them in the UI.
 
 ## Chapter 18. Monitoring and Debugging
 The Monitoring Landscape. At some point, you’ll need to monitor your Spark jobs to understand where 
-issues are occuring in them. It’s worth reviewing the different things that we can actually monitor 
+issues are occurring in them. It’s worth reviewing the different things that we can actually monitor 
 and outlining some of the options for doing so.
 
 * Spark Applications and Jobs
@@ -168,6 +168,153 @@ about monitoring and debugging our Spark Applications. There are two main things
 monitor: the processes running your application (at the level of CPU usage, memory usage, etc.), and 
 the query execution inside it (e.g., jobs and tasks).
 
+If you could monitor only one machine or a single JVM, it would definitely be the driver. With that 
+being said, understanding the state of the executors is also extremely important for monitoring 
+individual Spark jobs. To help with this challenge, Spark has a configurable metrics system based on 
+the Dropwizard Metrics Library. These metrics can be output to a variety of different sinks, 
+including cluster monitoring solutions like Ganglia.
+
+Although the driver and executor processes are important to monitor, sometimes you need to debug 
+what’s going on at the level of a specific query. Spark provides the ability to dive into queries, 
+jobs, stages, and tasks. When looking for performance tuning or debugging, this is where you are 
+most likely to start. 
+
+the two most common ways of doing so: the Spark logs and the Spark UI.
+
+The logs themselves will be printed to standard error when running a local mode application, or 
+saved to files by your cluster manager when running Spark on a cluster. Refer to each cluster 
+manager’s documentation about how to find them—typically, they are available through the cluster 
+manager’s web UI.
+
+The Spark UI provides a visual way to monitor applications while they are running as well as metrics 
+about your Spark workload, at the Spark and JVM level. Every SparkContext running launches a web UI.
+Cluster managers will also link to each application’s web UI from their own UI.
+
+Spark REST API. In addition to the Spark UI, you can also access Spark’s status and metrics via a 
+REST API. This is is available at http://localhost:4040/api/v1 and is a way of building 
+visualizations and monitoring tools on top of Spark itself. For the most part this API exposes the 
+same information presented in the web UI, except that it doesn’t include any of the SQL-related 
+information. This can be a useful tool if you would like to build your own reporting solution based 
+on the information available in the Spark UI.
+
+Normally, the Spark UI is only available while a SparkContext is running, so how can you get to it 
+after your application crashes or ends? To do this, Spark includes a tool called the Spark History 
+Server that allows you to reconstruct the Spark UI and REST API, provided that the application was 
+configured to save an event log. 
+
+There are many issues that may affect Spark jobs, so it’s impossible to cover everything. But we 
+will discuss some of the more common Spark issues you may encounter. In addition to the signs and 
+symptoms, we’ll also look at some potential treatments for these issues. Most of the recommendations 
+about fixing issues refer to the configuration tools discussed in Chapter 16.
+
+**Spark Jobs Not Starting, Errors Before Execution**
+
+* Ensure that machines can communicate with one another on the ports that you expect. Ideally, you 
+  should open up all ports between the worker nodes unless you have more stringent security constraints.
+* Ensure that your Spark resource configurations are correct and that your cluster manager is 
+  properly set up for Spark.
+
+**Errors During Execution**
+
+* providing the wrong input file path or field name.
+* Check to see if your data exists
+* analysis error while planning the query
+* Spark will show you the exception thrown by your code
+* you can also view the logs on that machine to understand what it was doing when it failed.
+
+**Slow Tasks or Stragglers**. This issue is quite common when optimizing applications, and can occur 
+either due to work not being evenly distributed across your machines (“skew”), or due to one of your 
+machines being slower than the others (e.g., due to a hardware problem).
+
+* Try increasing the number of partitions to have less data per partition.
+* Try repartitioning by another combination of columns. For example, stragglers can come up when you 
+  partition by a skewed ID column, or a column where many values are null. In the latter case, it 
+  might make sense to first filter out the null values.
+* Try increasing the memory allocated to your executors if possible.
+* Turning on speculation. This can be helpful if the issue is due to a faulty node because the task 
+  will get to run on a faster one. Speculation does come at a cost, however, because it consumes 
+  additional resources. In addition, for some storage systems that use eventual consistency, you 
+  could end up with duplicate output data if your writes are not idempotent.
+* If this issue is associated with a join or an aggregation, see “Slow Joins” or “Slow Aggregations”.
+* Check whether your user-defined functions (UDFs) are wasteful in their object allocation or 
+  business logic. Try to convert them to DataFrame code if possible.
+* Ensure that your UDFs or User-Defined Aggregate Functions (UDAFs) are running on a small enough 
+  batch of data. Oftentimes an aggregation can pull a lot of data into memory for a common key, 
+  leading to that executor having to do a lot more work than others.
+* Another common issue can arise when you’re working with Datasets. Because Datasets perform a lot 
+  of object instantiation to convert records to Java objects for UDFs, they can cause a lot of 
+  garbage collection. If you’re using Datasets, look at the garbage collection metrics in the Spark 
+  UI to see if they’re consistent with the slow tasks.
+
+
+**Slow Aggregations**
+
+* Sometimes, the data in your job just has some skewed keys, and the operation you want to run on 
+  them needs to be slow.
+* Ensure null values are represented correctly (using Spark’s concept of null) and not as some 
+  default value like " " or "EMPTY". Spark often optimizes for skipping nulls early in the job when 
+  possible, but it can’t do so for your own placeholder values.
+* Some aggregation functions are also just inherently slower than others. For instance, collect_list 
+  and collect_set are very slow aggregation functions because they must return all the matching 
+  objects to the driver, and should be avoided in performance-critical code.
+
+**Slow Joins**. Joins and aggregations are both shuffles, so they share some of the same general symptoms as well as 
+treatments.
+* Many joins can be optimized (manually or automatically) to other types of joins.
+* Experimenting with different join orderings can really help speed up jobs, especially if some of 
+  those joins filter out a large amount of data; do those first.
+* Slow joins can also be caused by data skew.
+* Ensuring that all filters and select statements that can be are above the join can help to ensure 
+  that you’re working only on the data that you need for the join.
+* Ensure that null values are handled correctly (that you’re using null) and not some default value 
+  like " " or "EMPTY", as with aggregations.
+
+**Slow Reads and Writes**
+* Turning on speculation
+* Ensuring sufficient network connectivity
+* For distributed file systems such as HDFS running on the same nodes as Spark, make sure Spark sees 
+  the same hostnames for nodes as the file system. This will enable Spark to do locality-aware 
+  scheduling, which you will be able to see in the “locality” column in the Spark UI.
+
+**Driver OutOfMemoryError or Driver Unresponsive**
+* Your code might have tried to collect an overly large dataset to the driver node using operations 
+  such as collect.
+* You might be using a broadcast join where the data to be broadcast is too big. Use Spark’s maximum 
+  broadcast join configuration to better control the size it will broadcast.
+* A long-running application generated a large number of objects on the driver and is unable to 
+  release them.
+* Increase the driver’s memory allocation if possible to let it work with more data.
+
+**Executor OutOfMemoryError or Executor Unresponsive**
+* Try increasing the memory available to executors and the number of executors.
+* UDF
+* Ensure that null values are handled correctly
+* Datasets because of object instantiations
+
+**Unexpected Nulls in Results**
+* Most often, users will place the accumulator in a UDF when they are parsing their raw data into a 
+  more controlled format and perform the counts there. This allows you to count valid and invalid 
+  records and then operate accordingly after the fact.
+* Ensure that your transformations actually result in valid query plans. Spark SQL sometimes does 
+  implicit type coercions that can cause confusing results.
+
+**No Space Left on Disk Errors**
+* You see “no space left on disk” errors and your jobs fail.
+
+**Serialization Errors**
+* This often happens when you’re working with either some code or data that cannot be serialized 
+  into a UDF or function, or if you’re working with strange data types that cannot be serialized. If 
+  you are using (or intend to be using Kryo serialization), verify that you’re actually registering 
+  your classes so that they are indeed serialized.
+* Try not to refer to any fields of the enclosing object in your UDFs when creating UDFs inside a 
+  Java or Scala class. This can cause Spark to try to serialize the whole enclosing object, which 
+  may not be possible. Instead, copy the relevant fields to local variables in the same scope as 
+  closure and use those.
+
+As with debugging any complex software, we recommend taking a principled, step-by-step approach to 
+debug issues. Add logging statements to figure out where your job is crashing and what type of data 
+arrives at each stage, try to isolate the problem to the smallest piece of code possible, and work 
+up from there. For data skew issues, which are unique to parallel computing.
 
 ## Chapter 19. Performance Tuning
 Just as with monitoring, there are a number of different levels that you can try to tune at. For
