@@ -140,6 +140,35 @@ already been shuffled does not rerun the “source” side of the shuffle. In th
 will see the pre-shuffle stages marked as “skipped”. You run some Spark actions on aggregated data 
 and inspect them in the UI.
 
+## Chapter 18. Monitoring and Debugging
+The Monitoring Landscape. At some point, you’ll need to monitor your Spark jobs to understand where 
+issues are occuring in them. It’s worth reviewing the different things that we can actually monitor 
+and outlining some of the options for doing so.
+
+* Spark Applications and Jobs
+  * Spark UI
+  * Spark logs
+* JVM
+  * JVM utilities such as jstack for providing stack traces, jmap for creating heap-dumps, jstat for 
+    reporting time–series statistics, and jconsole for visually exploring various JVM properties are 
+    useful for those comfortable with JVM internals. You can also use a tool like jvisualvm to help 
+    profile Spark jobs.
+  * Some of this information is provided in the Spark UI, but for very low-level debugging, the 
+    aforementioned tools can come in handy.
+* OS/Machine
+  * The JVMs run on a host operating system (OS) and it’s important to monitor the state of those 
+    machines to ensure that they are healthy. This includes monitoring things like CPU, network, and 
+    I/O. These are often reported in cluster-level monitoring solutions; however, there are more 
+    specific tools that you can use, including dstat, iostat, and iotop.
+* Cluster
+  * Some popular cluster-level monitoring tools include Ganglia and Prometheus.
+
+What to Monitor. After that brief tour of the monitoring landscape, let’s discuss how we can go 
+about monitoring and debugging our Spark Applications. There are two main things you will want to 
+monitor: the processes running your application (at the level of CPU usage, memory usage, etc.), and 
+the query execution inside it (e.g., jobs and tasks).
+
+
 ## Chapter 19. Performance Tuning
 Just as with monitoring, there are a number of different levels that you can try to tune at. For
 instance, if you had an extremely fast network, that would make many of your Spark jobs faster
