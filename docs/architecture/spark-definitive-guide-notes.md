@@ -81,7 +81,66 @@ To trigger the computation, we run an action. There are three kinds of actions:
 * Actions to collect data to native objects in the respective language
 * Actions to write to output data sources
 
-## chapter 19. Performance Tuning
+## Chapter 15. How Spark Runs on a Cluster
+The Spark driver. The driver is the process “in the driver seat” of your Spark Application. It is 
+the controller of the execution of a Spark Application and maintains all of the state of the Spark 
+cluster.
+
+An execution mode gives you the power to determine where the aforementioned resources are physically 
+located when you go to run your application. You have three modes to choose from:
+* Cluster mode
+* Client mode
+* Local mode
+
+Client mode. we are running the Spark Application from a machine that is not colocated on the 
+cluster. These machines are commonly referred to as gateway machines or edge nodes.
+
+Local mode is a significant departure from the previous two modes: it runs the entire Spark 
+Application on a single machine.
+
+Each application is made up of one or more Spark jobs. Spark jobs within an application are executed 
+serially (unless you use threading to launch multiple actions in parallel).
+
+A SparkContext object within the SparkSession represents the connection to the Spark cluster. This 
+class is how you communicate with some of Spark’s lower-level APIs, such as RDDs. Through a 
+SparkContext, you can create RDDs, accumulators, and broadcast variables, and you can run code on 
+the cluster. 
+
+`SparkContext.getOrCreate()`
+
+As a historical point, Spark 1.X had effectively two contexts. The SparkContext and the SQLContext. 
+In Spark 2.X, the community combined the two APIs into the centralized SparkSession that we have 
+today. It is important to note that you should never need to use the SQLContext and rarely need to 
+use the SparkContext.
+
+In general, there should be one Spark job for one action. Actions always return results. Each job 
+breaks down into a series of stages, the number of which depends on how many shuffle operations need 
+to take place.
+
+A shuffle represents a physical repartitioning of the data.
+
+By default when you create a DataFrame with range, it has eight partitions.
+
+The spark.sql.shuffle.partitions default value is 200, which means that when there is a shuffle 
+performed during execution, it outputs 200 shuffle partitions by default.
+
+One of the key optimizations that Spark performs is pipelining, which occurs at and below the RDD 
+level. With pipelining, any sequence of operations that feed data directly into each other, without 
+needing to move it across nodes, is collapsed into a single stage of tasks that do all the 
+operations together.
+
+Shuffle persistence. Spark always executes shuffles by first having the “source” tasks (those 
+sending data) write shuffle files to their local disks during their execution stage. Then, the stage 
+that does the grouping and reduction launches and runs tasks that fetch their corresponding records 
+from each shuffle file and performs that computation (e.g., fetches and processes the data for a 
+specific range of keys).
+
+One side effect you’ll see for shuffle persistence is that running a new job over data that’s 
+already been shuffled does not rerun the “source” side of the shuffle. In the Spark UI and logs, you 
+will see the pre-shuffle stages marked as “skipped”. You run some Spark actions on aggregated data 
+and inspect them in the UI.
+
+## Chapter 19. Performance Tuning
 Just as with monitoring, there are a number of different levels that you can try to tune at. For
 instance, if you had an extremely fast network, that would make many of your Spark jobs faster
 because shuffles are so often one of the costlier steps in a Spark job. Most likely, you won’t have
