@@ -10,4 +10,5 @@
 
 ## References
 
+* https://www.oreilly.com/ideas/apache-sparks-journey-from-academia-to-industry
 * O’Reilly Ben Lorica interviewed Ion Stoica. http://blog.madhukaraphatak.com/history-of-spark/
