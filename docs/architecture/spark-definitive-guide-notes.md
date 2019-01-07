@@ -81,6 +81,68 @@ To trigger the computation, we run an action. There are three kinds of actions:
 * Actions to collect data to native objects in the respective language
 * Actions to write to output data sources
 
+## Chapter 4. Structured API Overview
+The Structured APIs are a tool for manipulating all sorts of data, from unstructured log files to 
+semi-structured CSV files and highly structured Parquet files. These APIs refer to three core types 
+of distributed collection APIs:
+* Datasets
+* DataFrames
+* SQL tables and views
+
+the majority of the Structured APIs apply to both batch and streaming computation.
+
+Spark is a distributed programming model in which the user specifies transformations. Multiple 
+transformations build up a directed acyclic graph of instructions. An action begins the process of 
+executing that graph of instructions, as a single job, by breaking it down into stages and tasks to 
+execute across the cluster. The logical structures that we manipulate with transformations and 
+actions are DataFrames and Datasets. To create a new DataFrame or Dataset, you call a 
+transformation. To start computation or convert to native language types, you call an action.
+
+To Spark, DataFrames and Datasets represent immutable, lazily evaluated plans that specify what 
+operations to apply to data residing at a location to generate some output. When we perform an 
+action on a DataFrame, we instruct Spark to perform the actual transformations and return the 
+result. These represent plans of how to manipulate rows and columns to compute the user’s desired 
+result.
+
+Tables and views are basically the same thing as DataFrames. We just execute SQL against them 
+instead of DataFrame code.
+
+A schema defines the column names and types of a DataFrame. 
+* You can define schemas manually 
+* or read a schema from a data source (often called schema on read). 
+
+Spark is effectively a programming language of its own. Internally, Spark uses an engine called 
+Catalyst that maintains its own type information through the planning and processing of work. In 
+doing so, this opens up a wide variety of execution optimizations that make significant differences. 
+Spark types map directly to the different language APIs that Spark maintains and there exists a 
+lookup table for each of these in Scala, Java, Python, SQL, and R. Even if we use Spark’s Structured 
+APIs from Python or R, the majority of our manipulations will operate strictly on Spark types, not 
+Python types.
+
+DataFrames Versus Datasets.
+
+In essence, within the Structured APIs, there are two more APIs, the “untyped” DataFrames and the 
+“typed” Datasets. To say that DataFrames are untyped is as lightly inaccurate; they have types, but 
+Spark maintains them completely and only checks whether those types line up to those specified in 
+the schema at runtime. Datasets, on the other hand, check whether types conform to the specification 
+at compile time. Datasets are only available to Java Virtual Machine (JVM)–based languages (Scala 
+and Java) and we specify types with case classes or Java beans.
+
+For the most part, you’re likely to work with DataFrames. To Spark (in Scala), DataFrames are simply 
+Datasets of Type Row. The “Row” type is Spark’s internal representation of its optimized in-memory 
+format for computation. This format makes for highly specialized and efficient computation because 
+rather than using JVM types, which can cause high garbage-collection and object instantiation costs, 
+Spark can operate on its own internal format without incurring any of those costs. To Spark (in 
+Python or R), there is no such thing as a Dataset: everything is a DataFrame and therefore we always 
+operate on that optimized format.
+
+there are some excellent talks by Josh Rosen and Herman van Hovell:
+* Deep Dive into Project Tungsten Bringing Spark Closer to Bare Metal -Josh Rosen (Databricks)
+* A Deep Dive into the Catalyst Optimizer (Herman van Hovell)
+
+## Chapter 10. Spark SQL
+
+
 ## Chapter 15. How Spark Runs on a Cluster
 The Spark driver. The driver is the process “in the driver seat” of your Spark Application. It is 
 the controller of the execution of a Spark Application and maintains all of the state of the Spark 
