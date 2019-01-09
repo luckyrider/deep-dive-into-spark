@@ -4,6 +4,16 @@
 * Launch an interactive shell
 * Launch a batch application
 * Launch an app programmatically
+* command line parser
+
+packages:
+
+* org.apache.spark.launcher
+
+Modules:
+
+* spark-core
+* spark-launcher
 
 
 ## Launch an interactive shell
@@ -161,9 +171,13 @@ README.md
 ```
 
 ## Launch an application programmatically
-`SparkLauncher`
+`AbstractLauncher`
 
-![SparkLauncher](SparkLauncher.png)
+![AbstractLauncher](AbstractLauncher.png)
+
+`LauncherServer`
+
+![LauncherServer](LauncherServer.png)
 
 ## `SparkSubmit`
 
@@ -180,3 +194,22 @@ deploy mode. Second, we use this launch environment to invoke the main method of
   a standard Java class with a "main" method, e.g. `org.apache.spark.repl.Main`, `org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver`.
 * In yarn-cluster mode, use `yarn.Client` as a wrapper around the user class.
   `org.apache.spark.deploy.yarn.YarnClusterApplication` is used.
+  
+## Command Line Parser
+
+### SparkSubmitOptionParser
+Parser for spark-submit command line options. This class encapsulates the parsing code for 
+spark-submit command line options, so that there is a single list of options that needs to be
+maintained (well, sort of, but it makes it harder to break things).
+
+### SparkSubmitArgumentsParser
+`SparkSubmitArgumentsParser` = `SparkSubmitOptionParser`
+
+This class makes `SparkSubmitOptionParser` visible for Spark code outside of the `launcher` package, 
+since Java doesn't have a feature similar to `private[spark]`, and we don't want that class to be 
+public.
+
+```
+private[spark] abstract class SparkSubmitArgumentsParser extends SparkSubmitOptionParser
+```
+
