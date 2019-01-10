@@ -27,6 +27,9 @@
 
 ### livy-rsc
 
+Remote driver and client RPC:
+
+![remote driver rpc](remote-driver-rpc.png)
 
 ### livy-repl
 
