@@ -180,29 +180,42 @@ README.md
 ![LauncherServer](LauncherServer.png)
 
 ## `SparkSubmit`
+No matter what type a spark application we launch, we finally use `SparkSubmit` to submit the
+application.
+
 
 ![SparkSubmit](SparkSubmit.png)
 
 `SparkSubmit.submit()`: Submit the application using the provided parameters. This runs in two steps.
-First, we prepare the launch environment by setting up the appropriate classpath, system properties,
-and application arguments for running the child main class based on the cluster manager and the
-deploy mode. Second, we use this launch environment to invoke the main method of the child main class.
+
+1. First, we prepare the launch environment by setting up the appropriate classpath, system
+   properties, and application arguments for running the child main class based on the cluster 
+   manager and the deploy mode.
+2. Second, we use this launch environment to invoke the main method of the child main class.
+
+Arguments are parsed and encapsulated by `SparkSubmitArguments`.
 
 `SparkApplication`: Entry point for a Spark application.
 
-* In client mode, launch the application main class directly. `JavaMainApplication` is used to wrap
-  a standard Java class with a "main" method, e.g. `org.apache.spark.repl.Main`, `org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver`.
-* In yarn-cluster mode, use `yarn.Client` as a wrapper around the user class.
-  `org.apache.spark.deploy.yarn.YarnClusterApplication` is used.
+* In client mode, launch the application main class directly. `JavaMainApplication` is created. It
+  wraps a standard Java class with a "main" method, e.g. `org.apache.spark.repl.Main`, 
+  `org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver`.
+* In yarn-cluster mode, `org.apache.spark.deploy.yarn.YarnClusterApplication` is created. It uses
+  `org.apache.spark.deploy.yarn.Client` to wrap the user class.
+* `ClientApp` is used by standalone cluster.
+* `RestSubmissionClientApp`. It uses `RestSubmissionClient`. This is supported by standalone and 
+  Mesos.
   
-## Command Line Parser
+### Command Line Parser
 
-### SparkSubmitOptionParser
+**SparkSubmitOptionParser**
+
 Parser for spark-submit command line options. This class encapsulates the parsing code for 
 spark-submit command line options, so that there is a single list of options that needs to be
 maintained (well, sort of, but it makes it harder to break things).
 
-### SparkSubmitArgumentsParser
+**SparkSubmitArgumentsParser**
+
 `SparkSubmitArgumentsParser` = `SparkSubmitOptionParser`
 
 This class makes `SparkSubmitOptionParser` visible for Spark code outside of the `launcher` package, 
@@ -212,4 +225,8 @@ public.
 ```
 private[spark] abstract class SparkSubmitArgumentsParser extends SparkSubmitOptionParser
 ```
+
+**SparkSubmitArguments**
+
+Parses and encapsulates arguments from the spark-submit script.
 
