@@ -1,4 +1,4 @@
-# Hadoop Study Guide
+# HDFS Study Guide
 
 ## 术语表
 

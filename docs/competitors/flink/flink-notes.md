@@ -1,4 +1,4 @@
-# Flink Study Notes
+# Flink Notes
 
 ## Benchmark
 
