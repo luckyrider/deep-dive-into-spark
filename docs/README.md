@@ -10,4 +10,5 @@
 * Contributing
 * Fundamentals
 * Ecosystem
+* Competitors
 * References
