@@ -1,14 +1,17 @@
 # Deep Dive into Spark - Docs
 
-* Spark Architecture
-* Core
+* Overview
+* Launcher
 * Cluster Managers
+* Core
 * SQL
 * Machine Learning
 * Graph Analysis
 * Stream Processing
-* Contributing
-* Fundamentals
+* Common
+* Architecture
+* Algorithms
 * Ecosystem
 * Competitors
-* References
+* Contributing
+
