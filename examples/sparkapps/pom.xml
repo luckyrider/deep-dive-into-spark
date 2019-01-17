@@ -2,21 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ddis</groupId>
-  <artifactId>ddis-proginscala</artifactId>
+  <artifactId>ddis-sparkapps</artifactId>
   <version>0.1.0</version>
   <packaging>jar</packaging>
-  <name>Programming in Scala</name>
+  <name>Spark Apps</name>
 
   <prerequisites>
-    <maven>3.6.0</maven>
+    <maven>3.2.5</maven>
   </prerequisites>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
-    <scala.minor.version>2.12</scala.minor.version>
+    <scala.minor.version>2.11</scala.minor.version>
     <scala.complete.version>${scala.minor.version}.8</scala.complete.version>
+    <spark.version>2.3.1</spark.version>
   </properties>
 
   <build>
@@ -24,7 +25,7 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
-        <version>3.4.4</version>
+        <version>3.2.2</version>
         <configuration>
           <scalaVersion>${scala.complete.version}</scalaVersion>
           <scalaCompatVersion>${scala.minor.version}</scalaCompatVersion>
@@ -44,20 +45,48 @@
           </execution>
         </executions>
       </plugin>
-    </plugins>
+      <!-- Create JAR with dependencies, with specific main class -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <recompressZippedFiles>false</recompressZippedFiles>
+          <archive>
+            <manifest>
+              <mainClass>ddis.sparkapps.LineCounter</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>  
   </build>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Make sure this version is harmonized -->
       <dependency>
         <groupId>org.scala-lang</groupId>
         <artifactId>scalap</artifactId>
         <version>${scala.complete.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.scala-lang</groupId>
         <artifactId>scala-compiler</artifactId>
         <version>${scala.complete.version}</version>
+        <scope>provided</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -67,12 +96,20 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>${scala.complete.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_${scala.minor.version}</artifactId>
-      <version>3.0.3</version>
-      <scope>test</scope>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_${scala.minor.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-mllib_${scala.minor.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
+
 </project>

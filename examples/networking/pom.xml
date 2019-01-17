@@ -3,18 +3,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ddis</groupId>
-    <artifactId>ddis-metrics</artifactId>
+    <artifactId>ddis-networking</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
-    <name>Metrics</name>
+    <name>Networking</name>
     <description>
-        Metrics
+        Networking
     </description>
 
     <properties>
+        <netty.version>4.1.12.Final</netty.version>
+        <echo-server.hostname>localhost</echo-server.hostname>
+        <echo-server.port>8888</echo-server.port>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

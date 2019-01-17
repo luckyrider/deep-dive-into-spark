@@ -8,10 +8,10 @@
   <name>Deep Dive into Spark Parent POM</name>
 
   <modules>
-  	<module>examples/spark-apps</module>
-    <module>examples/spark-apps-launcher</module>
-    <module>examples/netty</module>
-    <module>examples/jetty</module>
+  	<module>examples/sparkapps</module>
+    <module>examples/sparkappslauncher</module>
+    <module>examples/networking</module>
+    <module>examples/webapps</module>
     <module>examples/metrics</module>
     <module>examples/proginscala</module>
   </modules>
