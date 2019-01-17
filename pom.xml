@@ -13,5 +13,6 @@
     <module>examples/netty</module>
     <module>examples/jetty</module>
     <module>examples/metrics</module>
+    <module>examples/proginscala</module>
   </modules>
 </project>

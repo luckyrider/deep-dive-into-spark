@@ -1,4 +1,4 @@
-package ddis.spark.apps
+package ddis.proginscala
 
 import org.apache.spark.sql.SparkSession
 
