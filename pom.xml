@@ -14,5 +14,6 @@
     <module>examples/webapps</module>
     <module>examples/metrics</module>
     <module>examples/proginscala</module>
+    <module>examples/languageapps</module>
   </modules>
 </project>
